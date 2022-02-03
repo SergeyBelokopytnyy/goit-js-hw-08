@@ -22,7 +22,16 @@ player.on('play', onPlay);
 
 player.on(
   'timeupdate',
-  _.throttle(function (data) {
-    localStorage.setItem('videoplayer-current-time', data.seconds);
+  _.throttle(function () {
+    player
+      .getCurrentTime()
+      .then(function (seconds) {
+        localStorage.setItem('videoplayer-current-time', seconds);
+        console.log(`seconds ${seconds}`);
+        // seconds = the current playback position
+      })
+      .catch(function (error) {
+        // an error occurred
+      });
   }, 1000),
 );

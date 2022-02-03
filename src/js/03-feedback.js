@@ -12,6 +12,8 @@ form.addEventListener(
   'input',
   throttle(event => {
     formData[event.target.name] = event.target.value;
+    formData.email = email.value;
+    formData.message = message.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
     console.log(formData);
   }, 500),
@@ -24,6 +26,8 @@ function onFormSubmit(event) {
   event.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
   console.log(`E-mail: ${formData.email}, Message: ${formData.message}`);
+  formData.email = '';
+  formData.message = '';
 }
 
 function populateTextarea() {
