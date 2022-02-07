@@ -23,11 +23,16 @@ populateTextarea();
 
 function onFormSubmit(event) {
   event.preventDefault();
-  event.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
-  console.log(`E-mail: ${formData.email}, Message: ${formData.message}`);
-  formData.email = '';
-  formData.message = '';
+  if (email.value !== '' && message.value !== '') {
+    event.preventDefault();
+    event.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY);
+    console.log(`E-mail: ${formData.email}, Message: ${formData.message}`);
+    formData.email = '';
+    formData.message = '';
+  } else {
+    return;
+  }
 }
 
 function populateTextarea() {
