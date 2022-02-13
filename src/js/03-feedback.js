@@ -1,4 +1,5 @@
 import throttle from 'lodash.throttle';
+import Notiflix from 'notiflix';
 
 const STORAGE_KEY = 'feedback-form-state';
 const formData = {};
@@ -31,6 +32,12 @@ function onFormSubmit(event) {
     formData.email = '';
     formData.message = '';
   } else {
+    Notiflix.Report.failure(
+      'You have not completed the form',
+      'All form values must be filled',
+      'Okay',
+    );
+
     return;
   }
 }
